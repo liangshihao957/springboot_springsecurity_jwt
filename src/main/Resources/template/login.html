@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- security   login登陆时 后台生成token，前端保存在http请求头中，每次请求都带上（跨域问题遇到再说） -->
+<html  xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>登陆时请求返回Token</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="./txcss/bootstrap-material-design.min.css">
+		<link rel="stylesheet" href="./txcss/common.css">
+		<link rel="stylesheet" href="./txcss/toastify.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<script src="./txcss/jquery-3.2.1.min.js"></script>
+	</head>
+	
+	<body>
+		<div id="page">
+			<div class="vbox cross-dir-center">
+				<form @submit.prevent="gettoken">
+					<h3>登录获取Token</h3>
+					<p></p>
+					<p>
+						<span class="fix-width100-inline">昵称</span>
+						<input name="username" v-model="content.username" />
+					</p>
+					<p>
+						<span class="fix-width100-inline">密码:</span>
+						<input name="password" v-model="content.password" />
+					</p>
+					<div class="hbox ">
+						<span class="fix-width100-inline">是否记住:</span>
+						<div class="hbox cross-dir-center">
+							<input type="radio" value="1" v-model="content.rememberMe">是</input>
+							<input type="radio" value="0" v-model="content.rememberMe">否</input>
+						</div>
+					</div>
+					<p>
+						<span class="fix-width100-inline"></span>
+						<input type="submit" value="提交"></input>
+					</p>
+				</form>
+			</div>
+		</div>
+		<script src="./css/login.js"></script>
+	</body>
+</html>
+
+
+
+
+<!-- 
+		<script>
+			function login() {
+				$.ajax({
+					type: 'post',
+					url: 'http://localhost:8102/auth/login',
+					cache: false,
+					data: {
+						'username': username,
+						'pwd': password,
+						'rememberMe': rememberMe,
+					}, //重点必须为一个变量如：data
+					contentType: "application/json; charset=utf-8",
+					success: function(data) {
+						if (data['status'] == '2') {
+							alert(data['errmsg'])
+						}
+						if (data['status'] == '1') {
+							alert(data['errmsg'])
+						}
+						if (data['status'] == '0') {
+							localStorage.setItem('sessions', data['session_id']); //保存到本地以sessions为key         
+							console.log(localStorage.sessions)
+							window.location.href = data['errmsg'];
+						}
+					},
+					error : function() {
+					                    alert("异常！");
+					}
+
+				});
+			}
+		</script>
+	</body>
+</html>
+ -->
